@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GrpcService {
 
-    @GrpcClient("requirement")
+    @GrpcClient("account")
     private RequirementAccountServiceGrpc.RequirementAccountServiceBlockingStub stub;
 
     public String getPhone(final String accountId) {
