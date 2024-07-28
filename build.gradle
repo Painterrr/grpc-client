@@ -81,3 +81,18 @@ bootJar {
 	archiveFileName = "app.jar"
 	destinationDirectory = file("./")
 }
+
+//// build.gradle 파일의 관련 부분
+//def logPath = "C:/grpc_test_for_logging/logs"
+//def logFileName = "RequirementServer.log"
+//
+//// Logging 설정
+//logging {
+//	file {
+//		path = logPath
+//		name = logFileName
+//	}
+//	level {
+//		root = "INFO"
+//	}
+//}
