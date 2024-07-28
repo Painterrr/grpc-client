@@ -60,7 +60,7 @@ public class Service {
         String phone = grpcService.getPhone(requirementReqDto.getAccountId());
 
         if (phone == null) {
-            throw new RuntimeException("Failed to retrieve phone for accountId: " + requirementReqDto.getAccountId());
+            throw new RuntimeException("** Failed to retrieve phone for accountId: " + requirementReqDto.getAccountId());
 
         } else {
             RequirementReqDto input = RequirementReqDto.builder()

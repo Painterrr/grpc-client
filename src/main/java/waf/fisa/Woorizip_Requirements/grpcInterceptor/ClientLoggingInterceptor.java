@@ -1,13 +1,15 @@
 package waf.fisa.Woorizip_Requirements.grpcInterceptor;
 
 import io.grpc.*;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ClientLoggingInterceptor implements ClientInterceptor {
 
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
             MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
-        System.out.println("** Calling method: " + method.getFullMethodName());
+        log.info("** Calling method: {}", method.getFullMethodName());
 
         return new ForwardingClientCall.SimpleForwardingClientCall<ReqT, RespT>(next.newCall(method, callOptions)) {
             @Override
@@ -15,7 +17,7 @@ public class ClientLoggingInterceptor implements ClientInterceptor {
                 super.start(new ForwardingClientCallListener.SimpleForwardingClientCallListener<RespT>(responseListener) {
                     @Override
                     public void onMessage(RespT message) {
-                        System.out.println("** Received response: " + message);
+                        log.info("** Received response: {}", message);
                         super.onMessage(message);
                     }
                 }, headers);
@@ -23,7 +25,7 @@ public class ClientLoggingInterceptor implements ClientInterceptor {
 
             @Override
             public void sendMessage(ReqT message) {
-                System.out.println("** Sending request: " + message);
+                log.info("** Sending request: {}", message);
                 super.sendMessage(message);
             }
         };
